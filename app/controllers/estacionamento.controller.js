@@ -3,7 +3,7 @@ const Estacionamento = db.estacionamento;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.title) {
+    if (!req.body.entrada) {
         res.status(400).send({
             message: "O conteúdo não pode ficar vazio!"
         });
@@ -11,9 +11,9 @@ exports.create = (req, res) => {
     }
 
     const estacionamento = {
-        title: req.body.title,
-        description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        entrada: req.body.entrada,
+        saida: req.body.saida,
+        valor: req.body.valor
     }
 
     Estacionamento.create(estacionamento).then(data => {

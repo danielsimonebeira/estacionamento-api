@@ -20,5 +20,10 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.estacionamento = require("./estacionamento.model.js")(sequelize, Sequelize);
+db.vaga = require("./vaga.model.js")(sequelize, Sequelize);
+db.veiculo = require("./veiculo.model.js")(sequelize, Sequelize);
+db.cliente = require("./cliente.model.js")(sequelize, Sequelize);
+db.modelo = require("./modelo.model.js")(sequelize, Sequelize);
+db.usuario = require("./usuario.model.js")(sequelize, Sequelize);
 
 module.exports = db;

@@ -1,27 +1,24 @@
 const { sequelize, Sequelize } = require(".");
 
 module.exports = (sequelize, Sequelize) => {
-    const Estacionamento = sequelize.define("Estacionamento", {
-        entrada: {
-            type: Sequelize.DATE
+    const Veiculo = sequelize.define("Veiculo", {
+        placa: {
+            type: Sequelize.STRING(45)
         },
-        saida: {
-            type: Sequelize.DATE
+        cor: {
+            type: Sequelize.STRING(45)
         },
-        valor: {
-            type: Sequelize.DECIMAL
-        },
-        veiculo_id: {
+        cliente_id: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Veiculos',
+                model: 'Clientes',
                 key: 'id'
             }
         },
-        vaga_id: {
+        modelo_id: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Vagas',
+                model: 'Modelos',
                 key: 'id'
             }
         }
@@ -30,14 +27,18 @@ module.exports = (sequelize, Sequelize) => {
             {
                 unique: false,
                 primary: false,
-                fields: ['veiculo_id']
+                fields: ['cliente_id']
             },
             {
                 unique: false,
                 primary: false,
-                fields: ['vaga_id']
+                fields: ['modelo_id']
+            },
+            {
+                unique: true,
+                fields: ['placa']
             }
         ]
     });
-    return Estacionamento;
+    return Veiculo;
 }
