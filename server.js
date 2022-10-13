@@ -19,7 +19,18 @@ app.get("/", (req, res) => {
     res.json({ message: "Bem vindo a api de estacionamento." });
 });
 
-require("./app/routes/estacionamento.routers")(app)
+const rotaEstacionamento = require("./app/routes/estacionamento.routers");
+const rotaVaga = require("./app/routes/vaga.routers");
+const rotaVeiculo = require("./app/routes/veiculo.routers");
+const rotaCliente = require("./app/routes/cliente.routers");
+const rotaModelo = require("./app/routes/modelo.routers");
+const rotaUsuario = require("./app/routes/usuario.routers");
+app.use(rotaEstacionamento);
+app.use(rotaVaga);
+app.use(rotaVeiculo);
+app.use(rotaCliente);
+app.use(rotaModelo);
+app.use(rotaUsuario);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
