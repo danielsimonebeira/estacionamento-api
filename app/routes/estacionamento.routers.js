@@ -1,13 +1,17 @@
-module.exports = app => {
-    const estacionamento = require("../controllers/estacionamento.controller");
+const express = require('express');
+const estacionamento = require("../controllers/estacionamento.controller"); 
 
-    var router =  require("express").Router();
+const rota = express.Router();
 
-    router.post("/", estacionamento.create);
-    router.get("/", estacionamento.findAll);
-    router.get("/:id", estacionamento.findOne);
-    router.put("/:id", estacionamento.update);
-    router.delete("/:id", estacionamento.delete);
+rota
+    .route('/api/estacionamentos')
+    .post(estacionamento.create)
+    .get(estacionamento.findAll);
+    
+rota
+    .route('/api/estacionamentos/:id')
+    .get(estacionamento.findOne)
+    .put(estacionamento.update)
+    .delete(estacionamento.delete);
 
-    app.use('/api/estacionamentos', router);
-};
+module.exports = rota;    

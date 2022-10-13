@@ -13,7 +13,8 @@ exports.create = (req, res) => {
     const estacionamento = {
         entrada: req.body.entrada,
         saida: req.body.saida,
-        valor: req.body.valor
+        valor: req.body.valor,
+        vaga_id: req.body.vaga_id
     }
 
     Estacionamento.create(estacionamento).then(data => {
@@ -27,8 +28,8 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null
+    const entrada = req.query.entrada;
+    var condition = entrada ? { entrada: { [Op.like]: `%${entrada}%` } } : null
 
     Estacionamento.findAll({ where: condition }).then(data => {
         res.send(data);
@@ -69,7 +70,7 @@ exports.update = (req, res) => {
                 message: "Estacionamento foi atualizado com sucesso."
             });
         } else {
-            message: `Não foi possivel atualizar com o id=${id}. Talvez Estacionamento não foi encontrado ou  `
+            message: `Não foi possivel atualizar com o id=${id}. Talvez Estacionamento não foi encontrado ou req.body esteja vazio!`
         }
     }).catch(err => {
         res.status(500).send({
